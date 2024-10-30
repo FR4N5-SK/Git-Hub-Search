@@ -20,6 +20,11 @@ searchInput.addEventListener('input', function() {
     fetch(`https://api.github.com/users/${searchInput.value}`)
     .then(response => response.json())
     .then(data => {
+        if (data.login == undefined) {
+            return result.innerHTML = `<h3 class="subtitulo lato-bold">Este usuario no existe...</h3><div class="boton">
+            <a href="./index.html" class="loto-bold back">Regresar</a>
+        </div>`
+        }
         localStorage.setItem("user", JSON.stringify(data.login));
         result.innerHTML = `<article class="card">
                 <figure class="card-image">
